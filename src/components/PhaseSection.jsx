@@ -64,10 +64,10 @@ function PhaseSection({ phase, isOpen, onPhaseClick, expandedCard, onCardClick }
         {isOpen && (
           <motion.div
             className="component-grid"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "circIn" }}
           >
             {components.map((comp, idx) => (
               <motion.div
@@ -75,9 +75,10 @@ function PhaseSection({ phase, isOpen, onPhaseClick, expandedCard, onCardClick }
                 layout
                 className={`component-card ${expandedCard === comp ? "expanded" : ""}`}
                 onClick={() => onCardClick(comp)}
+                whileHover={{ scale: 1.05 }}
               >
-                <div className="component-icon">{comp.icon}</div>
-                <div className="component-name">{comp.name}</div>
+                <motion.div layout="position" className="component-icon">{comp.icon}</motion.div>
+                <motion.div layout="position" className="component-name">{comp.name}</motion.div>
                   <AnimatePresence>
                     {expandedCard === comp && comp.tasks.length > 0 && (
                       <motion.div
@@ -85,7 +86,7 @@ function PhaseSection({ phase, isOpen, onPhaseClick, expandedCard, onCardClick }
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.2, ease: "circOut" }}
                       >
                         <ul>
                           {comp.tasks.map((task, taskIdx) => (

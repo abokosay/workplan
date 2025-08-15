@@ -107,12 +107,23 @@ body {
 }
 
 .task-list ul {
-  list-style-type: '✅ ';
-  padding-left: 20px;
+  list-style: none;
+  padding-left: 0;
   margin: 0;
 }
 
 .task-list li {
-  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
   color: #34495e;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.task-list li::before {
+  content: '✅';
+  margin-right: 10px;
+  font-size: 1.1em;
+  margin-top: 2px;
 }
