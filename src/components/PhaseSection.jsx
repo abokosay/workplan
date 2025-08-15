@@ -1,210 +1,279 @@
 import React from "react";
 
-// Full system phases data
+// Full system phases data for the White Label Restaurant System Mind Map
 const phaseData = {
-  "POS / Point of Sale": [
+  "1. التخطيط وتحليل المتطلبات": [
     {
-      name: "Select Customer & Type",
-      icon: "👤",
+      name: "الهدف: وضع أساس المشروع قبل أي برمجة",
+      icon: "🎯",
+      tasks: []
+    },
+    {
+      name: "تحديد نوع النظام",
+      icon: "⚙️",
       tasks: [
-        "Choose Dine-in / Pickup / Delivery",
-        "Assign table if Dine-in",
-        "Link order to customer profile"
+        "POS (نقطة بيع)",
+        "KDS (شاشة المطبخ)",
+        "PWA للزبون (طلب، دليفري، تيك أواي)",
+        "لوحة إدارة للمطعم + لوحة سوبر أدمن للتحكم بكل العملاء"
       ]
     },
     {
-      name: "Add Products to Order",
-      icon: "🛒",
-      tasks: [
-        "Browse product catalog",
-        "Hover highlights product",
-        "Click to add quantity"
-      ]
-    },
-    {
-      name: "Modify / Delete Items",
-      icon: "✏️",
-      tasks: [
-        "Edit quantity or options",
-        "Remove unwanted items",
-        "Visual feedback on change"
-      ]
-    },
-    {
-      name: "Payment",
-      icon: "💳",
-      tasks: [
-        "Select payment method (Cash/Card/E-wallet)",
-        "Generate receipt",
-        "Mark order as paid"
-      ]
-    },
-    {
-      name: "Notifications",
-      icon: "🔔",
-      tasks: [
-        "Notify KDS about new order",
-        "Show confirmation on POS",
-        "Alert staff for changes"
-      ]
-    },
-  ],
-  "KDS / Kitchen Display System": [
-    {
-      name: "Pending Orders",
-      icon: "🕒",
-      tasks: [
-        "Display new orders in Pending column",
-        "Animate fade-in on arrival",
-        "Color-code based on priority"
-      ]
-    },
-    {
-      name: "Ready Orders",
-      icon: "✅",
-      tasks: [
-        "Move order from Pending to Ready",
-        "Animate slide transition",
-        "Notify POS and customer"
-      ]
-    },
-    {
-      name: "Chef Characters",
-      icon: "👨‍🍳",
-      tasks: [
-        "Animate small chef character preparing order",
-        "Enhance visual feedback",
-        "Optional Lottie animations"
-      ]
-    },
-  ],
-  "Admin Dashboard": [
-    {
-      name: "Multi-Tenant Management",
+      name: "تحديد نوع الـ Multi-Tenant",
       icon: "🏢",
       tasks: [
-        "Add / edit / remove restaurants",
-        "Assign users and roles per restaurant",
-        "Secure data per tenant"
+        "Database per Tenant أو Shared Database with Tenant ID"
       ]
     },
     {
-      name: "Reports & Analytics",
-      icon: "📊",
+      name: "رسم الـ User Flow لكل دور",
+      icon: "🌊",
       tasks: [
-        "Daily / Weekly / Monthly sales",
-        "Order performance metrics",
-        "Revenue and payment overview"
+        "Customer",
+        "Delivery Guy",
+        "Manager",
+        "Admin (لكل مطعم)",
+        "Super Admin (للنظام ككل)"
       ]
     },
     {
-      name: "Notifications Setup",
-      icon: "✉️",
+      name: "اختيار التقنيات",
+      icon: "💻",
       tasks: [
-        "Email alerts for orders and promotions",
-        "SMS notifications for status updates",
-        "Configure templates"
+        "Frontend: React / Next.js (مع Tailwind أو Material UI)",
+        "Backend: Node.js (NestJS أو Express)",
+        "Database: PostgreSQL أو MongoDB",
+        "PWA: React + Workbox",
+        "Hosting: Docker + AWS / DigitalOcean",
+        "Payments: Stripe أو PayPal أو بوابات محلية",
+        "Notifications: Firebase Cloud Messaging + Twilio (SMS) + Nodemailer (Email)"
       ]
-    },
+    }
   ],
-  "Customer PWA (Delivery / Pickup)": [
+  "2. تصميم الـ Database و الـ Multi-Tenant Architecture": [
     {
-      name: "Choose Order Type",
-      icon: "🏍️",
+      name: "الهدف: هيكل بيانات قابل للتوسع",
+      icon: "🎯",
+      tasks: []
+    },
+    {
+      name: "جداول رئيسية",
+      icon: "🗂️",
       tasks: [
-        "Select Delivery or Pickup",
-        "Enter delivery address",
-        "Assign customer profile if logged in"
+        "restaurants (بيانات كل مطعم)",
+        "menus (قائمة الطعام)",
+        "orders (الطلبات)",
+        "users (الزبائن + الطاقم)",
+        "roles (صلاحيات: manager, chef, delivery, admin)",
+        "payments (تفاصيل الدفع)",
+        "notifications (سجل الإشعارات)"
       ]
     },
     {
-      name: "Add to Cart",
-      icon: "🛍️",
+      name: "إضافة Tenant ID",
+      icon: "🔑",
       tasks: [
-        "Select products and quantities",
-        "Show feedback animation on addition",
-        "Update cart totals dynamically"
+        "إضافة Tenant ID في كل جدول لربط البيانات بالمطعم المناسب."
       ]
     },
     {
-      name: "Checkout & Payment",
-      icon: "💰",
+      name: "تصميم العلاقات",
+      icon: "🔗",
       tasks: [
-        "Confirm items and address",
-        "Select payment method",
-        "Show confirmation animation"
+        "تصميم علاقات واضحة مع Indexes للأداء العالي."
       ]
-    },
-    {
-      name: "Order Status",
-      icon: "📦",
-      tasks: [
-        "Receive notifications on order progress",
-        "Track order in real-time",
-        "Show estimated delivery time"
-      ]
-    },
+    }
   ],
-  "Payment Integration": [
+  "3. تصميم الـ UI/UX والهوية": [
     {
-      name: "Transactions",
-      icon: "💳",
+      name: "الهدف: واجهة جذابة وسهلة الاستخدام",
+      icon: "🎯",
+      tasks: []
+    },
+    {
+      name: "واجهات النظام",
+      icon: "🖥️",
       tasks: [
-        "Handle cash / card / e-wallet",
-        "Log all payment details",
-        "Show success/failure feedback"
+        "واجهة POS لموظف الكاشير (شاشة لمس – سريعة)",
+        "واجهة KDS (عرض الطلبات في المطبخ مع تحديث لحظي)",
+        "لوحة تحكم المطعم: إدارة القائمة، متابعة الطلبات، التقارير.",
+        "لوحة سوبر أدمن: إدارة جميع العملاء، تفعيل/إيقاف المطاعم."
       ]
     },
     {
-      name: "Receipts",
-      icon: "🧾",
+      name: "PWA للزبائن",
+      icon: "📱",
       tasks: [
-        "Generate digital receipt",
-        "Send email/SMS receipt",
-        "Store record in database"
-      ]
-    },
-  ],
-  "Notifications (Email & SMS)": [
-    {
-      name: "Order Updates",
-      icon: "📧",
-      tasks: [
-        "Notify customers on new order",
-        "Alert on ready order",
-        "Provide ETA for delivery"
+        "تصفح القائمة",
+        "إضافة للسلة",
+        "اختيار التوصيل أو الاستلام",
+        "الدفع",
+        "تتبع الطلب"
       ]
     },
     {
-      name: "Promotions / Announcements",
-      icon: "📢",
-      tasks: [
-        "Send special offers",
-        "Schedule campaigns",
-        "Track open/click rates"
-      ]
-    },
-  ],
-  "UI/UX & Animation": [
-    {
-      name: "Interactive Feedback",
+      name: "تصميم الهوية المرنة",
       icon: "🎨",
       tasks: [
-        "Hover / click effects on buttons",
-        "Color transitions",
-        "Animated responses for user actions"
+        "تصميم الهوية بحيث يمكن تغيير الألوان والشعار لكل عميل بسهولة (Theme Config)."
+      ]
+    }
+  ],
+  "4. البنية الخلفية (Backend API)": [
+    {
+      name: "الهدف: API آمنة ومرنة",
+      icon: "🎯",
+      tasks: []
+    },
+    {
+      name: "بنية الـ API",
+      icon: "🏗️",
+      tasks: [
+        "REST أو GraphQL API مع Authentication JWT + Refresh Tokens."
       ]
     },
     {
-      name: "Characters & Lottie",
-      icon: "🤹",
+      name: "عزل بيانات المستأجرين",
+      icon: "🔒",
       tasks: [
-        "Animated chef or order characters",
-        "Fade / Slide / Bounce transitions",
-        "Enhance visual experience"
+        "Middleware لفصل بيانات كل مطعم (Tenant Isolation)."
       ]
     },
+    {
+      name: "التحديث اللحظي",
+      icon: "⚡",
+      tasks: [
+        "دعم WebSockets أو Firebase Realtime للتحديث الفوري للطلبات."
+      ]
+    },
+    {
+      name: "Endpoints رئيسية",
+      icon: "🔌",
+      tasks: [
+        "Auth (تسجيل دخول/خروج)",
+        "Orders (CRUD)",
+        "Menu (CRUD)",
+        "Payments (Stripe/PayPal Integration)",
+        "Notifications (Push/SMS/Email)"
+      ]
+    }
   ],
+  "5. تطوير الواجهة الأمامية (Frontend)": [
+    {
+      name: "الهدف: تطبيقات متكاملة لكل نوع مستخدم",
+      icon: "🎯",
+      tasks: []
+    },
+    {
+      name: "POS App",
+      icon: "🛍️",
+      tasks: [
+        "واجهة سريعة للعملاء الداخليين (React + Electron أو PWA)"
+      ]
+    },
+    {
+      name: "KDS App",
+      icon: "🍳",
+      tasks: [
+        "عرض الطلبات حسب الوقت والحالة."
+      ]
+    },
+    {
+      name: "Admin Dashboard",
+      icon: "📊",
+      tasks: [
+        "إدارة المطعم وإعداداته."
+      ]
+    },
+    {
+      name: "Super Admin Dashboard",
+      icon: "👑",
+      tasks: [
+        "إدارة النظام ككل."
+      ]
+    },
+    {
+      name: "Customer PWA",
+      icon: "🤳",
+      tasks: [
+        "الطلب والدفع وتتبع الطلب."
+      ]
+    }
+  ],
+  "6. الدفع الإلكتروني والإشعارات": [
+    {
+      name: "الهدف: تجربة طلب متكاملة",
+      icon: "🎯",
+      tasks: []
+    },
+    {
+      name: "دمج بوابات الدفع",
+      icon: "💳",
+      tasks: [
+        "دمج Stripe/PayPal + بوابات محلية (Hyperpay, PayTabs...)"
+      ]
+    },
+    {
+      name: "إشعارات الطلب",
+      icon: "🔔",
+      tasks: [
+        "Push (Firebase)",
+        "SMS (Twilio أو مزود محلي)",
+        "Email (Nodemailer)"
+      ]
+    }
+  ],
+  "7. الاختبار والجودة": [
+    {
+      name: "الهدف: التأكد من استقرار النظام",
+      icon: "🎯",
+      tasks: []
+    },
+    {
+      name: "أنواع الاختبارات",
+      icon: "🔬",
+      tasks: [
+        "اختبارات وحدة (Unit Tests) لكل API.",
+        "اختبارات تكامل (Integration Tests).",
+        "اختبارات أداء (Load Testing)."
+      ]
+    },
+    {
+      name: "محاكاة السيناريوهات",
+      icon: "🎭",
+      tasks: [
+        "محاكاة لسيناريوهات الطلب الحقيقية."
+      ]
+    }
+  ],
+  "8. النشر والصيانة": [
+    {
+      name: "الهدف: إطلاق النظام ومتابعته",
+      icon: "🎯",
+      tasks: []
+    },
+    {
+      name: "النشر التلقائي (CI/CD)",
+      icon: "🚀",
+      tasks: [
+        "إعداد CI/CD للنشر التلقائي."
+      ]
+    },
+    {
+      name: "مراقبة النظام",
+      icon: "📈",
+      tasks: [
+        "مراقبة النظام (Monitoring + Logging)."
+      ]
+    },
+    {
+      name: "الصيانة الدورية",
+      icon: "🛠️",
+      tasks: [
+        "تحديثات أمنية دورية."
+      ]
+    }
+  ]
 };
 
 // Component

@@ -1,25 +1,34 @@
 import React, { useState } from "react";
 import PhaseToolbar from "./components/PhaseToolbar";
 import PhaseSection from "./components/PhaseSection";
-import ModalInfo from "./components/ModalInfo";
 import "./styles/main.css";
 
 function App() {
   const phases = [
-    "Phase 1: Requirements",
-    "Phase 2: System Design",
-    "Phase 3: Development",
-    "Phase 4: Customization",
-    "Phase 5: Deployment",
-    "Phase 6: Maintenance",
+    "1. التخطيط وتحليل المتطلبات",
+    "2. تصميم الـ Database و الـ Multi-Tenant Architecture",
+    "3. تصميم الـ UI/UX والهوية",
+    "4. البنية الخلفية (Backend API)",
+    "5. تطوير الواجهة الأمامية (Frontend)",
+    "6. الدفع الإلكتروني والإشعارات",
+    "7. الاختبار والجودة",
+    "8. النشر والصيانة",
   ];
 
   const [selectedPhase, setSelectedPhase] = useState(phases[0]);
-  const [modalData, setModalData] = useState(null);
+
+  const handleCardClick = (cardData) => {
+    if (cardData.tasks && cardData.tasks.length > 0) {
+      const taskText = cardData.tasks.join("\\n - ");
+      alert(`Tasks for ${cardData.name}:\\n\\n - ${taskText}`);
+    } else {
+      alert(`No tasks for ${cardData.name}.`);
+    }
+  };
 
   return (
     <div className="app-container">
-      <h1 className="app-title">Interactive Restaurant System - Boss Level</h1>
+      <h1 className="app-title">خريطة طريق نظام مطاعم وايت ليبل</h1>
       <PhaseToolbar
         phases={phases}
         selectedPhase={selectedPhase}
@@ -27,11 +36,7 @@ function App() {
       />
       <PhaseSection
         phase={selectedPhase}
-        onCardClick={(data) => setModalData(data)}
-      />
-      <ModalInfo
-        data={modalData}
-        onClose={() => setModalData(null)}
+        onCardClick={handleCardClick}
       />
     </div>
   );
