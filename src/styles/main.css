@@ -5,44 +5,62 @@ body {
 
 .app-container {
   padding: 20px;
-  max-width: 100%;
+  max-width: 900px;
   margin: auto;
 }
 
 .app-title {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   color: #1f3c88;
 }
 
-.kanban-board {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 20px;
-  background: #e9eef2;
-  border-radius: 15px;
+.roadmap-container {
+  position: relative;
+  padding: 20px 0;
 }
 
-.phase-column {
-  flex: 0 0 300px; /* Flex-shrink, flex-grow, flex-basis */
-  background-color: #dfe7f0;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.roadmap-container::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #dbefff;
+  border-radius: 2px;
 }
 
-.phase-column h2 {
-  font-size: 1.2em;
+.phase-section {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 50px;
+}
+
+.phase-section::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 5px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #4facfe;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 4px #4facfe;
+}
+
+.phase-section h2 {
+  font-size: 1.5em;
   margin-top: 0;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #c8d4e0;
+  color: #1f3c88;
 }
 
-.component-list {
-  display: flex;
-  flex-direction: column;
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
+  align-items: start;
 }
 
 .component-card {
@@ -50,17 +68,18 @@ body {
   padding: 15px;
   border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px S10px rgba(0,0,0,0.08);
   transition: all 0.3s;
+  text-align: center;
 }
 
 .component-card:hover {
-  transform: translateY(-5px) scale(1.02);
+  transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .component-icon {
-  font-size: 1.8em;
+  font-size: 2em;
   margin-bottom: 8px;
 }
 

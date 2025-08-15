@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import PhaseColumn from "./PhaseColumn";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// This data was previously in PhaseSection.jsx
 const phaseData = {
   "1. التخطيط وتحليل المتطلبات": [
     { name: "الهدف: وضع أساس المشروع قبل أي برمجة", icon: "🎯", tasks: [] },
@@ -56,45 +54,35 @@ const phaseData = {
   ]
 };
 
-const boardVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-function KanbanBoard() {
-  const [expandedCard, setExpandedCard] = useState(null);
-
-  const handleCardClick = (cardData) => {
-    if (expandedCard === cardData) {
-      setExpandedCard(null);
-    } else {
-      setExpandedCard(cardData);
-    }
-  };
+function PhaseSection({ phase, expandedCard, onCardClick }) {
+  const components = phaseData[phase] || [];
 
   return (
-    <motion.div
-      className="kanban-board"
-      variants={boardVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      {Object.entries(phaseData).map(([phaseTitle, components]) => (
-        <PhaseColumn
-          key={phaseTitle}
-          title={phaseTitle}
-          components={components}
-          expandedCard={expandedCard}
-          onCardClick={handleCardClick}
-        />
-      ))}
-    </motion.div>
+    <div className="phase-section">
+      <h2>{phase}</h2>
+      <div className="component-grid">
+        {components.map((comp, idx) => (
+          <div
+            key={idx}
+            className={`component-card ${expandedCard === comp ? "expanded" : ""}`}
+            onClick={() => onCardClick(comp)}
+          >
+            <div className="component-icon">{comp.icon}</div>
+            <div className="component-name">{comp.name}</div>
+              {expandedCard === comp && comp.tasks.length > 0 && (
+                <div className="task-list">
+                  <ul>
+                    {comp.tasks.map((task, taskIdx) => (
+                      <li key={taskIdx}>{task}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
-export default KanbanBoard;
+export default PhaseSection;
