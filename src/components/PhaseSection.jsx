@@ -277,7 +277,7 @@ const phaseData = {
 };
 
 // Component
-function PhaseSection({ phase, onCardClick }) {
+function PhaseSection({ phase, expandedCard, onCardClick }) {
   const components = phaseData[phase] || [];
 
   return (
@@ -287,11 +287,20 @@ function PhaseSection({ phase, onCardClick }) {
         {components.map((comp, idx) => (
           <div
             key={idx}
-            className="component-card"
+            className={`component-card ${expandedCard === comp ? "expanded" : ""}`}
             onClick={() => onCardClick(comp)}
           >
             <div className="component-icon">{comp.icon}</div>
             <div className="component-name">{comp.name}</div>
+            {expandedCard === comp && comp.tasks.length > 0 && (
+              <div className="task-list">
+                <ul>
+                  {comp.tasks.map((task, taskIdx) => (
+                    <li key={taskIdx}>{task}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
       </div>

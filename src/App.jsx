@@ -16,14 +16,19 @@ function App() {
   ];
 
   const [selectedPhase, setSelectedPhase] = useState(phases[0]);
+  const [expandedCard, setExpandedCard] = useState(null);
 
   const handleCardClick = (cardData) => {
-    if (cardData.tasks && cardData.tasks.length > 0) {
-      const taskText = cardData.tasks.join("\\n - ");
-      alert(`Tasks for ${cardData.name}:\\n\\n - ${taskText}`);
+    if (expandedCard === cardData) {
+      setExpandedCard(null);
     } else {
-      alert(`No tasks for ${cardData.name}.`);
+      setExpandedCard(cardData);
     }
+  };
+
+  const handlePhaseSelect = (phase) => {
+    setSelectedPhase(phase);
+    setExpandedCard(null);
   };
 
   return (
@@ -32,10 +37,11 @@ function App() {
       <PhaseToolbar
         phases={phases}
         selectedPhase={selectedPhase}
-        onSelect={setSelectedPhase}
+        onSelect={handlePhaseSelect}
       />
       <PhaseSection
         phase={selectedPhase}
+        expandedCard={expandedCard}
         onCardClick={handleCardClick}
       />
     </div>
