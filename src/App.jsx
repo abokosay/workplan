@@ -14,7 +14,13 @@ function App() {
     "8. النشر والصيانة",
   ];
 
+  const [openPhase, setOpenPhase] = useState(phases[0]); // Keep the first phase open by default
   const [expandedCard, setExpandedCard] = useState(null);
+
+  const handlePhaseClick = (phase) => {
+    setOpenPhase(openPhase === phase ? null : phase);
+    setExpandedCard(null); // Collapse card when changing phase
+  };
 
   const handleCardClick = (cardData) => {
     if (expandedCard === cardData) {
@@ -32,6 +38,8 @@ function App() {
           <PhaseSection
             key={phase}
             phase={phase}
+            isOpen={openPhase === phase}
+            onPhaseClick={handlePhaseClick}
             expandedCard={expandedCard}
             onCardClick={handleCardClick}
           />

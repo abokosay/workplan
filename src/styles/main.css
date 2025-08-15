@@ -54,6 +54,18 @@ body {
   font-size: 1.5em;
   margin-top: 0;
   color: #1f3c88;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.phase-section.open h2 {
+  background-color: #e0e9f2;
+}
+
+.phase-section h2:hover {
+  background-color: #e8f0f7;
 }
 
 .component-grid {
