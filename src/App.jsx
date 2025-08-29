@@ -9,7 +9,7 @@ import "./styles/main.css";
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+      <div className="bg-slate-900 text-white min-h-screen flex items-center justify-center">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/rawskinx" element={<Rawskinx />} />
