@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import styles from "../styles/ComponentCard.module.css";
+import modalStyles from "../styles/ModalInfo.module.css";
 
 function ComponentCard({ comp }) {
   const [showInfo, setShowInfo] = useState(false);
@@ -6,21 +8,21 @@ function ComponentCard({ comp }) {
   return (
     <>
       <div
-        className="component-card"
+        className={styles.componentCard}
         onClick={() => setShowInfo(true)}
       >
-        <div className="component-icon">{comp.icon}</div>
-        <div className="component-name">{comp.name}</div>
+        <div className={styles.componentIcon}>{comp.icon}</div>
+        <div className={styles.componentName}>{comp.name}</div>
         <div
-          className="component-timeline"
+          className={styles.componentTimeline}
           style={{ width: `${comp.timeline}%` }}
         ></div>
       </div>
 
       {showInfo && (
-        <div className="info-box">
+        <div className={modalStyles.infoBox}>
           <span
-            className="info-box-close"
+            className={modalStyles.infoBoxClose}
             onClick={() => setShowInfo(false)}
           >
             ✖
