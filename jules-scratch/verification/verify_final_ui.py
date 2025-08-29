@@ -11,7 +11,16 @@ def run(playwright):
     page.wait_for_load_state("networkidle")
 
     # 3. Take a screenshot of the main page.
-    page.screenshot(path="jules-scratch/verification/tailwind_ui.png")
+    page.screenshot(path="jules-scratch/verification/final_homepage.png")
+
+    # 4. Click on the "Supreme Plots" card.
+    page.locator("a[href='/supreme-plots']").click()
+
+    # 5. Wait for the new page to load.
+    page.wait_for_load_state("networkidle")
+
+    # 6. Take a screenshot of the "Supreme Plots" page.
+    page.screenshot(path="jules-scratch/verification/final_supreme_plots_page.png")
 
     browser.close()
 

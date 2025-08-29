@@ -4,10 +4,12 @@ import Dashboard from "./pages/Dashboard";
 import Rawskinx from "./pages/Rawskinx";
 import SupremePlots from "./pages/SupremePlots";
 import AdsZone from "./pages/AdsZone";
+import "./styles/main.css";
+
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/rawskinx" element={<Rawskinx />} />
