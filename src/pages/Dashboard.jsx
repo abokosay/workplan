@@ -40,7 +40,7 @@ function Dashboard() {
   return (
     <div className="text-center">
       <h1 className="text-5xl font-bold mb-12">Welcome to the Dashboard</h1>
-      <div className="flex flex-row gap-8">
+      <div className="flex flex-row justify-center gap-8">
         {cards.map((card) => (
           <Link to={card.path} key={card.id}>
             <motion.div
