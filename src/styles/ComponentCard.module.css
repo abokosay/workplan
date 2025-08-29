@@ -1,0 +1,32 @@
+.componentCard {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.componentCard:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  background: linear-gradient(120deg,#e0f7ff,#d0f0ff);
+}
+
+.componentIcon {
+  font-size: 2em;
+  margin-bottom: 8px;
+  transition: transform 0.3s;
+}
+
+.componentCard:hover .componentIcon {
+  transform: rotate(10deg) scale(1.2);
+}
+
+.componentName {
+  /* No specific styles in main.css, but defined for structure */
+}
+
+.componentTimeline {
+  /* No specific styles in main.css, but defined for structure */
+}

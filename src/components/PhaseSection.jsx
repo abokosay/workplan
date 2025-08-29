@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../styles/PhaseSection.module.css";
 
 // Full system phases data
 const phaseData = {
@@ -212,9 +213,9 @@ function PhaseSection({ phase, onCardClick }) {
   const components = phaseData[phase] || [];
 
   return (
-    <div className="phase-section">
+    <div className={styles.phaseSection}>
       <h2>{phase}</h2>
-      <div className="component-grid">
+      <div className={styles.componentGrid}>
         {components.map((comp, idx) => (
           <div
             key={idx}

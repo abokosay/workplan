@@ -1,39 +1,23 @@
-import React, { useState } from "react";
-import PhaseToolbar from "./components/PhaseToolbar";
-import PhaseSection from "./components/PhaseSection";
-import ModalInfo from "./components/ModalInfo";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Rawskinx from "./pages/Rawskinx";
+import SupremePlots from "./pages/SupremePlots";
+import AdsZone from "./pages/AdsZone";
 import "./styles/main.css";
 
 function App() {
-  const phases = [
-    "Phase 1: Requirements",
-    "Phase 2: System Design",
-    "Phase 3: Development",
-    "Phase 4: Customization",
-    "Phase 5: Deployment",
-    "Phase 6: Maintenance",
-  ];
-
-  const [selectedPhase, setSelectedPhase] = useState(phases[0]);
-  const [modalData, setModalData] = useState(null);
-
   return (
-    <div className="app-container">
-      <h1 className="app-title">Interactive Restaurant System - Boss Level</h1>
-      <PhaseToolbar
-        phases={phases}
-        selectedPhase={selectedPhase}
-        onSelect={setSelectedPhase}
-      />
-      <PhaseSection
-        phase={selectedPhase}
-        onCardClick={(data) => setModalData(data)}
-      />
-      <ModalInfo
-        data={modalData}
-        onClose={() => setModalData(null)}
-      />
-    </div>
+    <BrowserRouter>
+      <div className="bg-slate-900 text-white min-h-screen flex items-center justify-center">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/rawskinx" element={<Rawskinx />} />
+          <Route path="/supreme-plots" element={<SupremePlots />} />
+          <Route path="/ads-zone" element={<AdsZone />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
