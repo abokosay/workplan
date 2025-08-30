@@ -4,6 +4,9 @@ import App from "./App";
 import "aos/dist/aos.css";
 import AOS from "aos";
 
+import './styles/main.css';
+import './components/Card.css';
+
 AOS.init();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
