@@ -30,30 +30,59 @@ const cards = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
+};
+
+
 function Dashboard() {
   return (
     <main className="text-center p-8">
-      <h1 className="text-5xl font-bold mb-12 text-white">My 2030 Vision</h1>
+      <motion.h1
+        className="text-5xl font-bold mb-12 text-[var(--primary)]"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        My 2030 Vision
+      </motion.h1>
 
-      <section className="flex flex-wrap justify-center gap-8">
+      <motion.section
+        className="flex flex-wrap justify-center gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {cards.map((card) => (
           <Link to={card.path} key={card.id}>
             <motion.div
-              className="bg-white rounded-lg shadow-lg flex items-center justify-center w-64 h-64"
+              className="bg-[var(--card-background)] border border-[var(--card-border)] rounded-lg shadow-lg flex items-center justify-center w-64 h-64 transition-all duration-300 hover:bg-[var(--card-hover-background)]"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              variants={itemVariants}
             >
-              <h2 className="text-2xl font-bold text-gray-800 text-center p-4">
+              <h2 className="text-2xl font-bold text-[var(--text-light)] text-center p-4">
                 {card.title}
               </h2>
             </motion.div>
           </Link>
         ))}
-      </section>
+      </motion.section>
 
       <section className="mt-16">
-        <div className="w-full max-w-2xl mx-auto bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: "10%" }}></div>
+        <div className="w-full max-w-2xl mx-auto bg-[var(--background-light)] rounded-full h-2.5">
+          <div className="bg-[var(--primary)] h-2.5 rounded-full" style={{ width: "10%" }}></div>
         </div>
       </section>
     </main>

@@ -1,5 +1,21 @@
 import React, { useRef, useEffect, useState } from "react";
 import MindMapNode from "./MindMapNode";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { scale: 0.5, opacity: 0 },
+  visible: { scale: 1, opacity: 1 },
+};
 
 function MindMap({ data }) {
   const [paths, setPaths] = useState([]);
@@ -41,7 +57,6 @@ function MindMap({ data }) {
       setPaths(newPaths);
     };
 
-    // Use a timeout to ensure nodes are rendered before calculating paths
     const timer = setTimeout(calculatePaths, 100);
     window.addEventListener("resize", calculatePaths);
 
@@ -55,31 +70,38 @@ function MindMap({ data }) {
     return null;
   }
 
-  const radius = 300; // Increased radius
+  const radius = 300;
   const angleStep = (2 * Math.PI) / (data.children?.length || 1);
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-[700px] flex items-center justify-center">
-      <div ref={centralNodeRef} className="absolute z-10">
+    <motion.div
+      ref={containerRef}
+      className="relative w-full min-h-[700px] flex items-center justify-center"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div ref={centralNodeRef} className="absolute z-10" variants={itemVariants}>
         <MindMapNode title={data.title} isCentral />
-      </div>
+      </motion.div>
 
       {data.children &&
         data.children.map((child, index) => {
-          const angle = angleStep * index - Math.PI / 2; // Start from top
+          const angle = angleStep * index - Math.PI / 2;
           const x = Math.cos(angle) * radius;
           const y = Math.sin(angle) * radius;
           return (
-            <div
+            <motion.div
               key={index}
               ref={(el) => (childNodeRefs.current[index] = el)}
               className="absolute z-10"
               style={{
                 transform: `translate(${x}px, ${y}px)`,
               }}
+              variants={itemVariants}
             >
               <MindMapNode title={child.title} />
-            </div>
+            </motion.div>
           );
         })}
 
@@ -94,22 +116,25 @@ function MindMap({ data }) {
             markerHeight="6"
             orient="auto-start-reverse"
           >
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="white" />
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--secondary)" />
           </marker>
         </defs>
         {paths.map((path, index) => (
-          <path
+          <motion.path
             key={index}
             d={path}
-            stroke="white"
+            stroke="var(--secondary)"
             strokeOpacity="0.5"
             strokeWidth="2"
             fill="none"
             markerEnd="url(#arrow)"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1, delay: index * 0.2 }}
           />
         ))}
       </svg>
-    </div>
+    </motion.div>
   );
 }
 
