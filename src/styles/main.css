@@ -1,34 +1,173 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-:root {
-  --background-dark: #1a1a2e;
-  --background-light: #2a2a4e;
-  --primary: #8a4fff;
-  --secondary: #c0a0ff;
-  --text-light: #f0f0f0;
-  --text-dark: #e0e0e0;
-  --card-background: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --card-hover-background: rgba(255, 255, 255, 0.1);
-}
-
-body {
-  background-color: var(--background-dark);
-  color: var(--text-light);
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .app-container {
   padding: 20px;
   max-width: 1200px;
   margin: auto;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .app-title {
   text-align: center;
   margin-bottom: 20px;
-  color: var(--primary);
+  color: #1f3c88;
+}
+
+/* PhaseToolbar */
+.phase-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.phase-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 12px;
+  background: #eee;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.phase-btn.active,
+.phase-btn:hover {
+  background: #4facfe;
+  color: white;
+}
+
+/* PhaseSection */
+.phase-section {
+  padding: 15px;
+  border-radius: 15px;
+  background: #f8faff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.component-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.component-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  background: linear-gradient(120deg,#e0f7ff,#d0f0ff);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  animation: scaleIn 0.3s;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top:10px;
+  right:10px;
+  border:none;
+  background:none;
+  cursor:pointer;
+  font-size:1.2em;
+}
+
+@keyframes fadeIn {
+  from {opacity:0;} to {opacity:1;}
+}
+
+@keyframes scaleIn {
+  from {transform: scale(0.8);} to {transform: scale(1);}
+}
+.component-icon {
+  font-size: 2em;
+  margin-bottom: 8px;
+  transition: transform 0.3s;
+}
+
+.component-card:hover .component-icon {
+  transform: rotate(10deg) scale(1.2);
+}
+.phase-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.toolbar-btn {
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+  background: #dbefff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.toolbar-btn:hover {
+  background: #a3cfff;
+}
+
+.toolbar-btn.active {
+  background: #4facfe;
+  color: white;
+  font-weight: bold;
+}
+.modal-overlay {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+}
+
+.modal-close {
+  float:right;
+  border:none;
+  background:none;
+  font-size:1.2em;
+  cursor:pointer;
+  color:red;
 }

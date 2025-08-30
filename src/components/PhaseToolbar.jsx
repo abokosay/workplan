@@ -1,15 +1,12 @@
 import React from "react";
-import styles from "../styles/PhaseToolbar.module.css";
 
 function PhaseToolbar({ phases, activePhase, onSelectPhase }) {
   return (
-    <div className={styles.phaseToolbar}>
+    <div className="phase-toolbar">
       {phases.map((phase, idx) => (
         <button
           key={idx}
-          className={`${styles.toolbarBtn} ${
-            activePhase === phase ? styles.active : ""
-          }`}
+          className={`toolbar-btn ${activePhase === phase ? "active" : ""}`}
           onClick={() => onSelectPhase(phase)}
         >
           {phase}
