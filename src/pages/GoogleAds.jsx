@@ -1,10 +1,22 @@
 import React from "react";
+import MindMap from "../components/MindMap";
+
+const mindMapData = {
+  title: "Google Ads",
+  children: [
+    { title: "Campaigns" },
+    { title: "Ad Groups" },
+    { title: "Keywords" },
+    { title: "Ad Copy" },
+    { title: "Bidding" },
+  ],
+};
 
 function GoogleAds() {
   return (
     <div className="text-white text-center">
-      <h1 className="text-5xl font-bold mb-12">Mind Map for Google Ads</h1>
-      <p>This is where the mind map for Google Ads will be displayed.</p>
+      <h1 className="text-5xl font-bold mb-12">Google Ads</h1>
+      <MindMap data={mindMapData} />
     </div>
   );
 }
