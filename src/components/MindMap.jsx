@@ -11,7 +11,7 @@ function MindMap({ data }) {
     if (!data || !data.children) return;
 
     const calculatePaths = () => {
-      if (!centralNodeRef.current) return;
+      if (!centralNodeRef.current || !containerRef.current) return;
 
       const containerRect = containerRef.current.getBoundingClientRect();
       const centralRect = centralNodeRef.current.getBoundingClientRect();
@@ -25,34 +25,42 @@ function MindMap({ data }) {
         const childRect = childRef.getBoundingClientRect();
         const childPoint = {
           x: childRect.left - containerRect.left + childRect.width / 2,
-          y: childRect.top - containerRect.top,
+          y: childRect.top - containerRect.top + childRect.height / 2,
         };
 
-        const controlX = centralPoint.x;
-        const controlY = childPoint.y;
+        const controlX = (centralPoint.x + childPoint.x) / 2;
+        const controlY = (centralPoint.y + childPoint.y) / 2;
 
-        return `M ${centralPoint.x} ${centralPoint.y} Q ${controlX} ${controlY} ${childPoint.x} ${childPoint.y}`;
+        const curveX = childPoint.x > centralPoint.x ? controlX + 50 : controlX - 50;
+        const curveY = childPoint.y > centralPoint.y ? controlY + 50 : controlY - 50;
+
+
+        return `M ${centralPoint.x} ${centralPoint.y} Q ${curveX} ${curveY} ${childPoint.x} ${childPoint.y}`;
       }).filter(p => p);
 
       setPaths(newPaths);
     };
 
-    // Calculate paths on mount and on window resize
-    calculatePaths();
+    // Use a timeout to ensure nodes are rendered before calculating paths
+    const timer = setTimeout(calculatePaths, 100);
     window.addEventListener("resize", calculatePaths);
-    return () => window.removeEventListener("resize", calculatePaths);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", calculatePaths);
+    };
   }, [data]);
 
   if (!data) {
     return null;
   }
 
-  const radius = 250; // Radius of the circle for child nodes
+  const radius = 300; // Increased radius
   const angleStep = (2 * Math.PI) / (data.children?.length || 1);
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-[600px] flex items-center justify-center">
-      <div ref={centralNodeRef} className="absolute">
+    <div ref={containerRef} className="relative w-full min-h-[700px] flex items-center justify-center">
+      <div ref={centralNodeRef} className="absolute z-10">
         <MindMapNode title={data.title} isCentral />
       </div>
 
@@ -65,7 +73,7 @@ function MindMap({ data }) {
             <div
               key={index}
               ref={(el) => (childNodeRefs.current[index] = el)}
-              className="absolute"
+              className="absolute z-10"
               style={{
                 transform: `translate(${x}px, ${y}px)`,
               }}
@@ -75,7 +83,7 @@ function MindMap({ data }) {
           );
         })}
 
-      <svg className="absolute top-0 left-0 w-full h-full" style={{ zIndex: -1 }}>
+      <svg className="absolute top-0 left-0 w-full h-full" style={{ zIndex: 0 }}>
         <defs>
           <marker
             id="arrow"
@@ -94,6 +102,7 @@ function MindMap({ data }) {
             key={index}
             d={path}
             stroke="white"
+            strokeOpacity="0.5"
             strokeWidth="2"
             fill="none"
             markerEnd="url(#arrow)"

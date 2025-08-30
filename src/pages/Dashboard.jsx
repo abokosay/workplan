@@ -32,9 +32,10 @@ const cards = [
 
 function Dashboard() {
   return (
-    <div className="text-center">
+    <main className="text-center p-8">
       <h1 className="text-5xl font-bold mb-12 text-white">My 2030 Vision</h1>
-      <div className="flex flex-wrap justify-center gap-8">
+
+      <section className="flex flex-wrap justify-center gap-8">
         {cards.map((card) => (
           <Link to={card.path} key={card.id}>
             <motion.div
@@ -48,11 +49,14 @@ function Dashboard() {
             </motion.div>
           </Link>
         ))}
-      </div>
-      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-12">
-        <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: "10%" }}></div>
-      </div>
-    </div>
+      </section>
+
+      <section className="mt-16">
+        <div className="w-full max-w-2xl mx-auto bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+          <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: "10%" }}></div>
+        </div>
+      </section>
+    </main>
   );
 }
 
